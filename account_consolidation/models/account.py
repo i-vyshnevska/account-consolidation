@@ -42,5 +42,5 @@ class AccountAccount(models.Model):
                     name = account.code + ' ' + account.name
                 result.append((account.id, name))
         else:
-            result = super(AccountAccount, self).name_get()
+            result = super().name_get()
         return result

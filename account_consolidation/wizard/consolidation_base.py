@@ -23,7 +23,7 @@ class AccountConsolidationBase(models.AbstractModel):
         if not self.env.user.company_id.is_consolidation:
             raise UserError(_('Consolidation wizards can only be called from '
                               'a consolidation company.'))
-        return super(AccountConsolidationBase, self).default_get(fields)
+        return super().default_get(fields)
 
     company_id = fields.Many2one(
         comodel_name='res.company',

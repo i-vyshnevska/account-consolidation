@@ -155,11 +155,11 @@ class AccountConsolidationConsolidate(models.TransientModel):
             [('journal_id', '=', self.journal_id.id),
              ('to_be_reversed', '=', True),
              ('consol_company_id', '=', subsidiary.id)])
-        reversal_action = self.env['account.move.reverse'].with_context(
+        reversal_action = self.env['account.move.reversal'].with_context(
             active_ids=move_to_reverse.ids).create({
                 'date': self._get_month_first_date(),
                 'journal_id': self.journal_id.id
-            }).action_reverse()
+            }).reverse_moves()
         reversal_move = move_obj.browse(reversal_action.get('res_id'))
 
         return move_to_reverse, reversal_move
@@ -396,7 +396,7 @@ class AccountConsolidationConsolidate(models.TransientModel):
 
         :return: dict to open an Items view filtered on the created move lines
         """
-        super(AccountConsolidationConsolidate, self).run_consolidation()
+        super().run_consolidation()
 
         created_moves = self.env['account.move']
 

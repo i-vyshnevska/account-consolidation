@@ -19,8 +19,7 @@ class AccountConsolidationCheck(models.TransientModel):
 
     def check_account_mapping(self):
         """Convert errors message to a HTML list of errors."""
-        invalid_items_per_company = super(AccountConsolidationCheck,
-                                          self).check_account_mapping()
+        invalid_items_per_company = super().check_account_mapping()
 
         err_lines = []
         for company, account_errors in invalid_items_per_company.items():
@@ -34,8 +33,7 @@ class AccountConsolidationCheck(models.TransientModel):
 
     def check_interco_partner(self):
         """Convert errors message to a HTML list of errors."""
-        invalid_partners = super(AccountConsolidationCheck,
-                                 self).check_interco_partner()
+        invalid_partners = super().check_interco_partner()
         err_lines = []
         if invalid_partners:
             err_lines.append('<div><ul>')

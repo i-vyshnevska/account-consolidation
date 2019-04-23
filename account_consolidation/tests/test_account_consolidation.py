@@ -219,9 +219,9 @@ class TestAccountConsolidation(TransactionCase):
         february_res = february_wizard.run_consolidation()
 
         for move in january_moves:
-            reversed_move = move.reversal_id
+            reversed_move = move.reverse_entry_id
             self.assertEqual(reversed_move.amount, move.amount)
-            self.assertEqual(reversed_move.date,
+            self.assertEqual(reversed_move.date.strftime('%Y-%m-%d'),
                              february_wizard._get_month_first_date())
 
         february_line_ids = february_res['domain'][0][2]

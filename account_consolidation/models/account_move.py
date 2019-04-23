@@ -14,13 +14,18 @@ class AccountMove(models.Model):
         string='Consolidated from Company',
         readonly=True
     )
+    to_be_reversed = fields.Boolean(
+        string="To Be Reversed",
+        copy=False,
+        help="Check this box if your entry has to be reversed at the end "
+             "of period.")
 
     @api.model
     def _fields_view_get(self, view_id=None, view_type='form', toolbar=False,
                          submenu=False):
         """Hide fields `consol_company_id` if the user is not connected to
         a consolidation company."""
-        res = super(AccountMove, self)._fields_view_get(
+        res = super()._fields_view_get(
             view_id, view_type, toolbar, submenu
         )
         if view_type == 'form':
@@ -58,7 +63,7 @@ class AccountMoveLine(models.Model):
                          submenu=False):
         """Hide fields `consol_company_id` and `consol_partner_id` if the
         user is not connected to a consolidation company."""
-        res = super(AccountMoveLine, self)._fields_view_get(
+        res = super()._fields_view_get(
             view_id, view_type, toolbar, submenu
         )
 
